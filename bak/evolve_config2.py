@@ -1,21 +1,17 @@
 update_cache = False
 train_data = [
     # khdp_7flys
-    dict(
-        img_prefix='/data/data/split_ss_yimu_m6_p2/train_khdp_7flys_gsd5_orgsize_noDecay_seg-v2/images',
-        ann_file='/data/data/split_ss_yimu_m6_p2/train_khdp_7flys_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230531_p1p2',
-        select_ids=None,
-        filter_empty_gt=False,
-        update_cache=False,
-    ),
+    {
+        'img_prefix': '/data/data/split_ss_yimu_m6_p2/train_khdp_7flys_gsd5_orgsize_noDecay_seg-v2/images',
+        'ann_file': '/data/data/split_ss_yimu_m6_p2/train_khdp_7flys_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230531_p1p2',
+        'select_ids': None, 'filter_empty_gt': False, 'update_cache': False
+    },
     # khdp_v2_3flys
-    dict(
-        img_prefix='/data/data/split_ss_yimu_m6_p1/train_khdp_v2_3flys_gsd5_orgsize_noDecay_seg-v2/images',
-        ann_file='/data/data/split_ss_yimu_m6_p1/train_khdp_v2_3flys_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230531_p1p2',
-        select_ids=None,
-        filter_empty_gt=False,
-        update_cache=update_cache,
-    ),
+    {
+        'img_prefix': '/data/data/split_ss_yimu_m6_p1/train_khdp_v2_3flys_gsd5_orgsize_noDecay_seg-v2/images',
+        'ann_file': '/data/data/split_ss_yimu_m6_p1/train_khdp_v2_3flys_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230531_p1p2',
+        'select_ids': None, 'filter_empty_gt': False, 'update_cache': False
+    },
     # khdp_v3
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_044_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
@@ -26,108 +22,130 @@ train_data = [
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_064_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_064_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_065_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_065_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_073_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_073_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_072_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_072_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     # khdp_v4
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_013_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_013_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_015_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_015_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_016_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_016_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_028_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_20230601',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_028_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     # khdp_202306_zhubin
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_067_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_067_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_068_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_068_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_069_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_069_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_070_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_070_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_071_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_071_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_075_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_075_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_078_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_078_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_080_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_080_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_081_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_081_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_082_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_082_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_084_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_084_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_087_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_087_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_089_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_089_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     {
         'ann_file': '/data/data/split_ss_yimu_m6_p4/test_khdp_090_mod_loc_gsd5_orgsize_noDecay_seg-v2/annfiles2_labelme_202306016',
         'img_prefix': '/data/data/split_ss_yimu_m6_p4/test_khdp_090_mod_loc_gsd5_orgsize_noDecay_seg-v2/images',
-        'filter_empty_gt': False, 'update_cache': update_cache},
+        'filter_empty_gt': False, 'update_cache': update_cache
+    },
 
     # KHXP_DZ
     {
@@ -472,3 +490,4 @@ ckpt_path = '/data/output/yolox_swinT_small_ds8x_s2048_s3_experiment42/backup_ck
 
 n_trail = 10
 n_epoch = 1
+

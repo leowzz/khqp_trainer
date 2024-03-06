@@ -1,16 +1,22 @@
-# 这是一个示例 Python 脚本。
+# streamlit_app.py
 
-# 按 Ctrl+F5 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+import streamlit as st
 
+# Create the SQL connection to pets_db as specified in your secrets file.
+conn = st.connection('data_db', type='sql')
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 F9 切换断点。
+# Insert some data with conn.session.
+with conn.session as s:
+    s.execute('CREATE TABLE IF NOT EXISTS pet_owners (person TEXT, pet TEXT);')
+    s.execute('DELETE FROM pet_owners;')
+    pet_owners = {'jerry': 'fish', 'barbara': 'cat', 'alex': 'puppy'}
+    for k in pet_owners:
+        s.execute(
+            'INSERT INTO pet_owners (person, pet) VALUES (:owner, :pet);',
+            params=dict(owner=k, pet=pet_owners[k])
+        )
+    s.commit()
 
-
-# 按装订区域中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+# Query and display the data you inserted
+pet_owners = conn.query('select * from pet_owners')
+st.dataframe(pet_owners)
