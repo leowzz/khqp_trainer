@@ -9,6 +9,8 @@ from db_utils import BatchData, get_session
 st.session_state.setdefault('data_table', [])
 
 
+# session: Session = next(get_session())
+
 def get_data_from_db():
     logger.info("init")
     return (BatchDataRead.from_orm(db_obj).dict()
@@ -28,10 +30,17 @@ def update_handler(*args, **kwargs):
 
 edited_df = st.data_editor(df, key="edited_info",
                            hide_index=True,
-                           on_change=update_handler,
-                           column_order=('id', 'year', 'is_validation'),
                            use_container_width=True,
-                           )  # 👈 An editable dataframe
+                           on_change=update_handler,
+                           column_order=('id', 'year', 'census_batch', 'id_code', 'precision', 'is_train', 'is_validation'),
+                           column_config={
+                               "year": st.column_config.NumberColumn("年份", format="%d 年", ),
+                               'census_batch': "普查批次",
+                               'id_code': "编号",
+                               'precision': "精度",
+                               'is_train': "是否是训练集",
+                               'is_validation': "是否是验证集",
+                           })
 
 favorite_command = edited_df.loc[edited_df["id"].idxmax()]
 data_table_change_info = st.session_state['edited_info']
@@ -44,6 +53,7 @@ for id_, update_data in edited_rows.items():
     for field in update_data:
         setattr(row_db, field, update_data[field])
     st.text(f"update: {id_=}, {update_data=}")
+    st.toast('Your edited image was saved!', icon='😍')
     session.commit()
     st.rerun()
 logger.info('end')
