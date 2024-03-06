@@ -16,3 +16,11 @@ lbs_path 不生成
 
 [streamlit_sqlite](https://docs.streamlit.io/library/advanced-features/connecting-to-data)
 
+
+模型训练的启动参数在这个页面配置, 包括训练集, 测试集, 会在这个页面编辑数据
+实际使用的数据是那两个path, 
+后续需要在这个页面补充训练数据或测试数据
+
+每次运行都要把一些数据加载到数据库里, 
+还是说把这些数据处理到数据库里后, 之后就是对数据库操作了
+然后是不是 val_data 也需要放到这个数据库里
