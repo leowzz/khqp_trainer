@@ -23,6 +23,7 @@ def get_data_from_db():
 st.session_state.setdefault('data_table', get_data_from_db())
 st.session_state.setdefault('configs', {})
 st.session_state.setdefault('username', '')
+st.session_state.setdefault('evolve_r', 0.1)
 
 df = pd.DataFrame(data=st.session_state.data_table)
 
@@ -31,7 +32,7 @@ config_container = st.container()
 
 
 def train():
-    st.session_state.configs['username'] = st.session_state.username
+    st.session_state.configs['evolve_r'] = st.session_state.evolve_r
     config_container.json(st.session_state.configs)
 
 
@@ -62,10 +63,14 @@ with data_frame_container:
         })
 
 with config_container:
-    st.empty()
+    # st.empty()
+    st.session_state.configs['evolve_r'] = st.session_state.evolve_r
+    st.json(st.session_state.configs)
 
 with st.sidebar:
     st.divider()
+
+    st.session_state.evolve_r = st.slider('evolve_r', min_value=0.0, max_value=0.5, value=st.session_state.evolve_r, step=0.01)
     st.text_input("username", key='username')
     st.divider()
     st.button("启动", on_click=train)
