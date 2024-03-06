@@ -9,5 +9,8 @@ df = pd.DataFrame(
     data=(BatchDataRead.from_orm(db_obj).dict()
           for db_obj in session.query(BatchData).all())
 )
-#
-st.dataframe(df, use_container_width=True)
+
+edited_df = st.data_editor(df)  # 👈 An editable dataframe
+
+favorite_command = edited_df.loc[edited_df["id"].idxmax()]
+st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
