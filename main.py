@@ -21,12 +21,18 @@ def get_data_from_db():
 
 
 st.session_state.setdefault('data_table', get_data_from_db())
+st.session_state.setdefault('configs', {})
+st.session_state.setdefault('username', '')
 
 df = pd.DataFrame(data=st.session_state.data_table)
 
+data_frame_container = st.container()
+config_container = st.container()
+
 
 def train():
-    ...
+    st.session_state.configs['username'] = st.session_state.username
+    config_container.json(st.session_state.configs)
 
 
 def update_handler():
@@ -39,7 +45,6 @@ def update_handler():
         session.commit()
 
 
-data_frame_container = st.container()
 with data_frame_container:
     edited_df = st.data_editor(
         df, key="edited_info",
@@ -56,8 +61,11 @@ with data_frame_container:
             'is_validation': "是否是验证集",
         })
 
+with config_container:
+    st.empty()
+
 with st.sidebar:
     st.divider()
-    st.text_input("username")
+    st.text_input("username", key='username')
     st.divider()
     st.button("启动", on_click=train)
