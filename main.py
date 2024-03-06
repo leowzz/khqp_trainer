@@ -52,7 +52,6 @@ def update_handler():
 
 
 def update_config(*args, **kwargs):
-    logger.debug(f"{args=}, {kwargs=}, {st.session_state.configs=}, {st.session_state.evolve_r=}")
     st.session_state.configs['evolve_r'] = st.session_state.evolve_r
 
 
@@ -81,7 +80,6 @@ with st.sidebar:
     st.slider(label='evolve_r', key='evolve_r',
               min_value=0.0, max_value=0.5, step=0.01,
               on_change=update_config)
-    logger.debug(st.session_state.evolve_r)
     st.text_input("username", key='username')
     st.divider()
     st.button("启动", on_click=train)
