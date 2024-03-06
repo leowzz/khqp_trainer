@@ -30,7 +30,8 @@ edited_df = st.data_editor(df, key="edited_info",
                            hide_index=True,
                            on_change=update_handler,
                            column_order=('id', 'year', 'is_validation'),
-                           use_container_width=True)  # 👈 An editable dataframe
+                           use_container_width=True,
+                           )  # 👈 An editable dataframe
 
 favorite_command = edited_df.loc[edited_df["id"].idxmax()]
 data_table_change_info = st.session_state['edited_info']
@@ -39,12 +40,10 @@ logger.debug(f"{data_table_change_info=}")
 edited_rows = data_table_change_info.get('edited_rows')
 session = next(get_session())
 for id_, update_data in edited_rows.items():
-    row_db = session.query(BatchData).where(BatchData.id == id_).first()
+    row_db = session.query(BatchData).where(BatchData.id == int(edited_df.loc[id_].id)).first()
     for field in update_data:
         setattr(row_db, field, update_data[field])
-    session.add(row_db)
-    session.commit()
-    # logger.info(f"{BatchDataRead.from_orm(row_db)}")
     st.text(f"update: {id_=}, {update_data=}")
-
+    session.commit()
+    st.rerun()
 logger.info('end')
