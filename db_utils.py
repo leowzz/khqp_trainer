@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-from loguru import logger
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-
-from bak.evolve_config2 import train_data
-from bak.init_data import BatchDataBase
 
 Base = declarative_base()
 # 创建 SQLite 数据库引擎
