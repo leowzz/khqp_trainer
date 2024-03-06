@@ -58,6 +58,7 @@ def update_config(*args, **kwargs):
 with data_frame_container:
     edited_df = st.data_editor(
         df, key="edited_info",
+        height=600,
         hide_index=True,
         use_container_width=True,
         on_change=update_handler,
@@ -76,10 +77,8 @@ with config_container:
 
 with st.sidebar:
     st.divider()
-
     st.slider(label='evolve_r', key='evolve_r',
               min_value=0.0, max_value=0.5, step=0.01,
               on_change=update_config)
-    st.text_input("username", key='username')
     st.divider()
     st.button("启动", on_click=train)
