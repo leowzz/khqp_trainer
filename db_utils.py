@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+from typing import Generator
+
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
 # 创建 SQLite 数据库引擎
-engine = create_engine('sqlite:///data.db', echo=False)
+engine = create_engine('sqlite:///data.db', echo=True)
 
 
 class BatchData(Base):
@@ -27,3 +29,11 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine, )
 session = Session()
+
+
+def get_session() -> Generator:
+    try:
+        db = Session()
+        yield db
+    finally:
+        db.close()
