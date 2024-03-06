@@ -1,4 +1,4 @@
-sqlalchemy~=1.4
+sqlalchemy~=2.0
 streamlit~=1.29
 pydantic~=1.0
 loguru~=0.7
