@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-from typing import Generator
 
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -29,11 +28,3 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine, )
 session = Session()
-
-
-def get_session() -> Generator:
-    try:
-        db = Session()
-        yield db
-    finally:
-        db.close()
