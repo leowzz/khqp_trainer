@@ -18,6 +18,7 @@ PAGE_TITLE = "training data configer"
 st.set_page_config(
     page_title=PAGE_TITLE,
     page_icon="🧊",
+    layout="wide",
     initial_sidebar_state="expanded",
 )
 
@@ -44,6 +45,7 @@ df = pd.DataFrame(data=st.session_state.data_table)
 
 data_frame_container = st.container()
 config_container = st.container()
+left_col, right_col = st.columns([3, 1])
 
 
 def train():
@@ -67,14 +69,14 @@ def update_config(*args, **kwargs):
     st.session_state.configs['mode'] = st.session_state.mode
 
 
-with data_frame_container:
+with left_col:
     edited_df = st.data_editor(
         df, key="edited_info",
         height=600,
         hide_index=True,
         use_container_width=True,
         on_change=update_handler,
-        column_order=('id', 'year', 'census_batch', 'id_code', 'precision', 'is_train', 'is_validation'),
+        column_order=('id', 'year', 'census_batch', 'id_code', 'precision', 'is_train', 'is_validation', 'ann_file', 'img_prefix'),
         column_config={
             "year": st.column_config.NumberColumn("年份", format="%d 年", ),
             'census_batch': "普查批次",
@@ -82,31 +84,26 @@ with data_frame_container:
             'precision': "精度",
             'is_train': "是否是训练集",
             'is_validation': "是否是验证集",
+            'ann_file': "path",
+            'ann_file_lbs': "lbs_path",
         })
+# col1, col2, col3, col4, col5 = st.columns(5)
+with right_col:
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with config_container:
-    st.divider()
-
-    with col1:
-        st.slider(label='evolve_r', key='evolve_r',
-                  min_value=0.0, max_value=0.5, step=0.01,
-                  on_change=update_config)
-    with col2:
-        st.selectbox(label='n_trail', key='n_trail',
-                     options=(i for i in range(10, 51, 10)))
-        st.selectbox(label='n_epoch', key='n_epoch',
-                     options=(i for i in range(1, 6)))
-    with col3:
-        st.selectbox(label='ckpt_path', key='ckpt_path',
-                     options=(os.listdir(BASE_CKPT_DIR)))
-    with col4:
-        st.selectbox(label='mode', key='mode',
-                     format_func=lambda x: RUN_MODE[x],
-                     options=RUN_MODE,
-                     on_change=update_config)
-    with col5:
-        st.json(st.session_state.configs)
+    st.slider(label='evolve_r', key='evolve_r',
+              min_value=0.0, max_value=0.5, step=0.01,
+              on_change=update_config)
+    st.selectbox(label='n_trail', key='n_trail',
+                 options=(i for i in range(10, 51, 10)))
+    st.selectbox(label='n_epoch', key='n_epoch',
+                 options=(i for i in range(1, 6)))
+    st.selectbox(label='ckpt_path', key='ckpt_path',
+                 options=(os.listdir(BASE_CKPT_DIR)))
+    st.selectbox(label='mode', key='mode',
+                 format_func=lambda x: RUN_MODE[x],
+                 options=RUN_MODE,
+                 on_change=update_config)
+    st.json(st.session_state.configs)
 
     st.divider()
     st.button("启动", on_click=train)
