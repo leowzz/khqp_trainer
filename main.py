@@ -103,7 +103,7 @@ def train():
         k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')
     }
     train_config_dict.update(prepare_train_data(st.session_state.mode))
-    right_col.json(train_config_dict)
+    left_col.json(train_config_dict)
 
 
 def table_update_handler():
