@@ -84,23 +84,29 @@ with data_frame_container:
             'is_validation': "是否是验证集",
         })
 
+col1, col2, col3, col4, col5 = st.columns(5)
 with config_container:
-    st.json(st.session_state.configs)
-
-with st.sidebar:
     st.divider()
-    st.slider(label='evolve_r', key='evolve_r',
-              min_value=0.0, max_value=0.5, step=0.01,
-              on_change=update_config)
-    st.selectbox(label='n_trail', key='n_trail',
-                 options=(i for i in range(10, 51, 10)))
-    st.selectbox(label='n_epoch', key='n_epoch',
-                 options=(i for i in range(1, 6)))
-    st.selectbox(label='ckpt_path', key='ckpt_path',
-                 options=(os.listdir(BASE_CKPT_DIR)))
-    st.selectbox(label='mode', key='mode',
-                 format_func=lambda x: RUN_MODE[x],
-                 options=RUN_MODE,
-                 on_change=update_config)
+
+    with col1:
+        st.slider(label='evolve_r', key='evolve_r',
+                  min_value=0.0, max_value=0.5, step=0.01,
+                  on_change=update_config)
+    with col2:
+        st.selectbox(label='n_trail', key='n_trail',
+                     options=(i for i in range(10, 51, 10)))
+        st.selectbox(label='n_epoch', key='n_epoch',
+                     options=(i for i in range(1, 6)))
+    with col3:
+        st.selectbox(label='ckpt_path', key='ckpt_path',
+                     options=(os.listdir(BASE_CKPT_DIR)))
+    with col4:
+        st.selectbox(label='mode', key='mode',
+                     format_func=lambda x: RUN_MODE[x],
+                     options=RUN_MODE,
+                     on_change=update_config)
+    with col5:
+        st.json(st.session_state.configs)
+
     st.divider()
     st.button("启动", on_click=train)
