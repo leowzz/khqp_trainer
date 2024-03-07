@@ -10,6 +10,8 @@ lbs_path 不生成
 
 ![](bak/ui_.png)
 
+![](./bak/cd.png)
+
 ## reference
 
 [streamlit data_editor](https://docs.streamlit.io/library/advanced-features/dataframes)
