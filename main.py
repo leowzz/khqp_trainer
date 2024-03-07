@@ -87,9 +87,8 @@ with left_col:
             'ann_file': "path",
             'ann_file_lbs': "lbs_path",
         })
-# col1, col2, col3, col4, col5 = st.columns(5)
-with right_col:
 
+with right_col:
     st.slider(label='evolve_r', key='evolve_r',
               min_value=0.0, max_value=0.5, step=0.01,
               on_change=update_config)
