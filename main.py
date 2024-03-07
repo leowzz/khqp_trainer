@@ -51,7 +51,7 @@ left_col, right_col = st.columns([3, 1])
 
 
 def train():
-    st.session_state.configs['evolve_r'] = st.session_state.evolve_r
+    right_col.json({k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')})
 
 
 def table_update_handler():
@@ -136,7 +136,4 @@ with right_col:
                  format_func=lambda x: RUN_MODE[x],
                  options=RUN_MODE,
                  on_change=update_config)
-    st.json({
-        k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')
-    })
     st.button("启动", on_click=train)
