@@ -96,8 +96,7 @@ def create_new_row():
     session.commit()
     session.refresh(new_db_obj)
     logger.debug(f"{BatchDataRead.from_orm(new_db_obj)=}")
-    # st.session_state.data_table.append(BatchDataRead.from_orm(new_db_obj).dict())
-    st.session_state.data_table = get_data_from_db()
+    st.session_state.data_table.append(BatchDataRead.from_orm(new_db_obj).dict())
 
 
 with left_col:
