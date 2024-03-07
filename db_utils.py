@@ -19,6 +19,7 @@ class BatchData(Base):
     is_train = Column(Integer)
     is_validation = Column(Integer)
     ann_file = Column(String)
+    ann_file_lbs = Column(String)
     img_prefix = Column(String)
     filter_empty_gt = Column(Integer)
     update_cache = Column(Integer)

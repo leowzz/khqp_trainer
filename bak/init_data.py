@@ -12,6 +12,7 @@ class BatchDataBase(BaseModel):
     is_validation: bool | None = None
 
     ann_file: str | None = None
+    ann_file_lbs: str | None = None
     img_prefix: str | None = None
     filter_empty_gt: bool | None = None
     update_cache: bool | None = None
