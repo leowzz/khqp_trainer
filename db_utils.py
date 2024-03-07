@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String, create_engine, Date, TIMESTAMP
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
@@ -23,6 +23,7 @@ class BatchData(Base):
     img_prefix = Column(String)
     filter_empty_gt = Column(Integer)
     update_cache = Column(Integer)
+    create_at = Column(TIMESTAMP)
 
 
 Base.metadata.create_all(engine)

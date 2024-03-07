@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -16,6 +18,7 @@ class BatchDataBase(BaseModel):
     img_prefix: str | None = None
     filter_empty_gt: bool | None = None
     update_cache: bool | None = None
+    create_at: datetime | None = None
 
 
 class BatchDataRead(BatchDataBase):
@@ -38,3 +41,4 @@ class BatchDataCreate(BatchDataBase):
     img_prefix: str | None = ''
     filter_empty_gt: bool | None = False
     update_cache: bool | None = False
+    create_at: datetime | None = datetime.now()

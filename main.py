@@ -47,7 +47,6 @@ st.session_state.setdefault('configs', {
 if not st.session_state.data_table:
     st.session_state.data_table = get_data_from_db()
 
-df = pd.DataFrame(data=st.session_state.data_table)
 
 left_col, right_col = st.columns([3, 1])
 
@@ -57,6 +56,7 @@ def train():
 
 
 def table_update_handler():
+    st.session_state.data_table = get_data_from_db()
     logger.debug(f"{st.session_state.edited_info=}")
     edited_rows = st.session_state.edited_info.get('edited_rows')
     added_rows = st.session_state.edited_info.get('added_rows')
@@ -81,22 +81,27 @@ def table_update_handler():
         session.delete(row_db)
         session.commit()
 
+        # deleted_row_data = next(filter(lambda x: x.get('id') == row_id, st.session_state.data_table[::-1], ))
+        # logger.debug(f"{deleted_row_data=}")
+        # del deleted_row_data
+
 
 def update_config(*args, **kwargs):
     return None
 
 
 def create_new_row():
-    session.add(
-        BatchData(**BatchDataCreate().dict())
-    )
+    new_db_obj = BatchData(**BatchDataCreate().dict())
+    session.add(new_db_obj)
     session.commit()
+    session.refresh(new_db_obj)
+    logger.debug(f"{BatchDataRead.from_orm(new_db_obj)=}")
+    # st.session_state.data_table.append(BatchDataRead.from_orm(new_db_obj).dict())
     st.session_state.data_table = get_data_from_db()
-
 
 with left_col:
     edited_df = st.data_editor(
-        df, key="edited_info",
+        pd.DataFrame(data=st.session_state.data_table), key="edited_info",
         num_rows="dynamic",
         height=600,
         hide_index=True,
@@ -134,6 +139,4 @@ with right_col:
     st.json({
         k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')
     })
-
-    st.divider()
     st.button("启动", on_click=train)
