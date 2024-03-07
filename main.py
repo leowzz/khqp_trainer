@@ -43,6 +43,7 @@ def make_train_dicts(with_entities: tuple, conditions: tuple):
 
 
 def prepare_train_data(mode_id) -> dict[str, list]:
+    # 训练集/测试集 实体类定义, 查询条件定义
     train_we, train_cd = tuple(), tuple()
     val_we, val_cd = tuple(), tuple()
     if mode_id == 1:
@@ -98,8 +99,11 @@ left_col, right_col = st.columns([3, 1])
 
 
 def train():
-    right_col.json({k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')})
-    right_col.json(prepare_train_data(st.session_state.mode))
+    train_config_dict = {
+        k: st.session_state[k] for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode')
+    }
+    train_config_dict.update(prepare_train_data(st.session_state.mode))
+    right_col.json(train_config_dict)
 
 
 def table_update_handler():
