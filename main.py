@@ -78,10 +78,12 @@ def table_update_handler():
         row_db = session.query(BatchData).where(BatchData.id == row_id).first()
         session.delete(row_db)
         session.commit()
+        logger.debug(f"{st.session_state.data_table[-1].get('id')=}")
 
-        # deleted_row_data = next(filter(lambda x: x.get('id') == row_id, st.session_state.data_table[::-1], ))
-        # logger.debug(f"{deleted_row_data=}")
-        # del deleted_row_data
+        deleted_row_data = next(filter(lambda x: x.get('id') == row_id, st.session_state.data_table[::-1], ))
+        logger.debug(f"{deleted_row_data=}")
+        list.remove(st.session_state.data_table, deleted_row_data)
+        logger.debug(f"{st.session_state.data_table[-1].get('id')=}")
 
 
 def update_config(*args, **kwargs):
