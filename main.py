@@ -70,14 +70,14 @@ def prepare_train_data(mode_id) -> dict[str, list]:
             conditions=(BatchData.is_validation == 1,)
         )
     elif mode_id == 3:
-        res['train_data'] = make_train_dicts(conditions=(
-            BatchData.is_train == 1,
-            BatchData.ann_file.is_not(None)
-        ))
-        val_db_objs = session.query(BatchData).where(BatchData.is_validation == 1).all()
-        for db_obj in val_db_objs:
-            res['val_data'].append(DataRow(path=db_obj.ann_file,
-                                           img_prefix=db_obj.img_prefix).dict())
+        res['train_data'] = make_train_dicts(
+            with_entities=(BatchData.img_prefix, BatchData.ann_file.label('ann_file')),
+            conditions=(BatchData.is_train == 1, BatchData.ann_file.is_not(None))
+        )
+        res['val_data'] = make_train_dicts(
+            with_entities=(BatchData.img_prefix, BatchData.ann_file.label('ann_file')),
+            conditions=(BatchData.is_validation == 1, BatchData.ann_file.is_not(None))
+        )
     return res
 
 
