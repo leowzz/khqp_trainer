@@ -3,6 +3,6 @@ version: "3"
 services:
   train_starter:
     build: .
-    image: train_starter:1.0.1
+    image: train_starter:1.0.2
     container_name: train_starter
     network_mode: "host"
