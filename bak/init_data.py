@@ -25,3 +25,16 @@ class BatchDataRead(BatchDataBase):
         orm_mode = True
 
 
+class BatchDataCreate(BatchDataBase):
+    year: int | None = 2024
+    census_batch: str | None = ''  # 普查批次
+    id_code: str | None = ''  # 编号
+    precision: str | None = ''  # 精度
+    is_train: bool | None = True
+    is_validation: bool | None = False
+
+    ann_file: str | None = ''
+    ann_file_lbs: str | None = ''
+    img_prefix: str | None = ''
+    filter_empty_gt: bool | None = False
+    update_cache: bool | None = False
