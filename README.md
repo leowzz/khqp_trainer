@@ -27,3 +27,4 @@ lbs_path 不生成
 lbs模式: select(train==1, path=lbs_path)
 lbs优先模式: select(train==1, path=lbs_path if lbs_path else path)
 不使用lbs模式: select(train==1, path=path)
+
