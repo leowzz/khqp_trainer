@@ -49,18 +49,15 @@ if not st.session_state.data_table:
 
 df = pd.DataFrame(data=st.session_state.data_table)
 
-data_frame_container = st.container()
-config_container = st.container()
 left_col, right_col = st.columns([3, 1])
 
 
 def train():
     st.session_state.configs['evolve_r'] = st.session_state.evolve_r
-    config_container.json(st.session_state.configs)
 
 
 def update_handler():
-    edited_rows = st.session_state['edited_info'].get('edited_rows')
+    edited_rows = st.session_state.edited_info.get('edited_rows')
     for id_, update_data in edited_rows.items():
         row_id = int(edited_df.loc[id_].id)
         row_db = session.query(BatchData).where(BatchData.id == row_id).first()
@@ -73,13 +70,12 @@ def update_handler():
 
 def update_config(*args, **kwargs):
     return None
-    # for k in ('evolve_r', 'n_trail', 'n_epoch', 'ckpt_path', 'mode'):
-    #     st.session_state.configs[k] = st.session_state[k]
 
 
 with left_col:
     edited_df = st.data_editor(
         df, key="edited_info",
+        num_rows="dynamic",
         height=600,
         hide_index=True,
         use_container_width=True,
