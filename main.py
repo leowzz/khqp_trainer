@@ -22,6 +22,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+
 @st.cache_data
 def list_ckpt_paths(dir_path):
     return os.listdir(dir_path)
@@ -64,6 +65,7 @@ def update_handler():
         row_id = int(edited_df.loc[id_].id)
         row_db = session.query(BatchData).where(BatchData.id == row_id).first()
         logger.info(f"{row_id=}, {update_data=}")
+        logger.debug(BatchDataRead.from_orm(row_db))
         for field in update_data:
             setattr(row_db, field, update_data[field])
         session.commit()
@@ -82,7 +84,8 @@ with left_col:
         hide_index=True,
         use_container_width=True,
         on_change=update_handler,
-        column_order=('id', 'year', 'census_batch', 'id_code', 'precision', 'is_train', 'is_validation', 'ann_file', 'img_prefix'),
+        column_order=(
+            'id', 'year', 'census_batch', 'id_code', 'precision', 'is_train', 'is_validation', 'ann_file', 'ann_file_lbs', 'img_prefix',),
         column_config={
             "year": st.column_config.NumberColumn("年份", format="%d 年", ),
             'census_batch': "普查批次",
@@ -90,8 +93,9 @@ with left_col:
             'precision': "精度",
             'is_train': "是否是训练集",
             'is_validation': "是否是验证集",
-            'ann_file': "path",
-            'ann_file_lbs': "lbs_path",
+            'ann_file': st.column_config.Column("path", width='medium'),
+            'ann_file_lbs': st.column_config.Column("lbs_path", width='medium'),
+            'img_prefix': st.column_config.Column("img_prefix", width='medium'),
         })
 
 with right_col:
