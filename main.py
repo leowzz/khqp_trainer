@@ -47,7 +47,6 @@ st.session_state.setdefault('configs', {
 if not st.session_state.data_table:
     st.session_state.data_table = get_data_from_db()
 
-
 left_col, right_col = st.columns([3, 1])
 
 
@@ -56,7 +55,6 @@ def train():
 
 
 def table_update_handler():
-    st.session_state.data_table = get_data_from_db()
     logger.debug(f"{st.session_state.edited_info=}")
     edited_rows = st.session_state.edited_info.get('edited_rows')
     added_rows = st.session_state.edited_info.get('added_rows')
@@ -98,6 +96,7 @@ def create_new_row():
     logger.debug(f"{BatchDataRead.from_orm(new_db_obj)=}")
     # st.session_state.data_table.append(BatchDataRead.from_orm(new_db_obj).dict())
     st.session_state.data_table = get_data_from_db()
+
 
 with left_col:
     edited_df = st.data_editor(
