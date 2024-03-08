@@ -1,32 +1,41 @@
-万事胜意:
-你可以理解为,现在我上面写的所有train_data都是数据库初始化的值,都是不规则的所以要初始化时就填入,后续在streamlit 新添加的都会默认的把path填好
-比如我填2023 KHQP 001 path就能有
+## 技术栈
 
-万事胜意:
-lbs_path 不生成
-精度在初始化数据库都给S3
+使用sqlalchemy作为orm框架处理sqlite, pydantic作为数据模型
 
-## UI
+[pydantic1](https://docs.pydantic.dev/1.10/)
 
-![](bak/ui_.png)
-
-![](./bak/cd.png)
-
-## reference
+[sqlalchemy2](https://docs.sqlalchemy.org/en/20/intro.html)
 
 [streamlit data_editor](https://docs.streamlit.io/library/advanced-features/dataframes)
 
 [streamlit_sqlite](https://docs.streamlit.io/library/advanced-features/connecting-to-data)
 
-模型训练的启动参数在这个页面配置, 包括训练集, 测试集, 会在这个页面编辑数据
-实际使用的数据是那两个path,
-后续需要在这个页面补充训练数据或测试数据
+## 实现思路
 
-每次运行都要把一些数据加载到数据库里,
-还是说把这些数据处理到数据库里后, 之后就是对数据库操作了
-然后是不是 val_data 也需要放到这个数据库里
+整体思路是: 保证DataFrame的数据和数据库的数据一致, 避免数据的重复加载
+增删查改的操作都是对数据库的操作, 操作数据库后需要保证DataFrame的数据同步更新
 
-lbs模式: select(train==1, path=lbs_path)
-lbs优先模式: select(train==1, path=lbs_path if lbs_path else path)
-不使用lbs模式: select(train==1, path=path)
+1. 初始化变量, 使用st.session_state保存变量
+
+   ![img.png](./bak/init_vars.png)
+
+2. 数据加载部分, 执行sql语句, 生成数据, 一般页面刷新时执行
+
+   ![img.png](./bak/load_data.png)
+
+3. 数据编辑部分, 实际上是对数据库的操作, 操作数据库后需要保证DataFrame的数据同步更新, 这里把操作放到回调函数上, 避免数据频繁更新导致页面闪烁
+
+   ![img.png](./bak/table_handler.png)
+
+4. 最终数据处理部分, 实际上是按照不同条件生成特定的sql语句, 然后执行sql语句, 生成数据
+
+   ![img.png](./bak/make_data.png)
+
+5. 数据库模型定义部分, 将数据表定义成类, 以使用sqlalchemy操作sqlite
+
+   ![img.png](./bak/db_model.png)
+
+6. 数据模型定义部分, 主要用户数据创建, 将读取到的数据行转为数据模型类, 也可以快速转为字典
+
+   ![img.png](./bak/data_schema.png)
 
