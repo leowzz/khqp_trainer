@@ -14,6 +14,17 @@
 
 [streamlit_sqlite](https://docs.streamlit.io/library/advanced-features/connecting-to-data)
 
+## 效果
+
+主页面
+
+![](./bak/home.png)
+
+生成json
+
+![](./bak/output_json.png)
+
+
 ## 实现思路
 
 整体思路是: 保证DataFrame的数据和数据库的数据一致, 避免数据的重复加载
