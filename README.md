@@ -1,6 +1,10 @@
+# 模型训练数据可视化生成器
+
+简单数据crud. 训练数据特殊查询, json生成
+
 ## 技术栈
 
-使用sqlalchemy作为orm框架处理sqlite, pydantic作为数据模型
+使用sqlalchemy作为orm框架处理sqlite, pydantic作为数据模型, streamlit可视化交互工具
 
 [pydantic1](https://docs.pydantic.dev/1.10/)
 
